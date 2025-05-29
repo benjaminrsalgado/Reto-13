@@ -8,27 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    let mascotas = [
-        Mascota(nombre: "perro", emoji: "👽"),
-        Mascota(nombre: "gato", emoji: "🐈"),
-        Mascota(nombre: "serpiente", emoji: "🤢")
-  ]
+    let postres = [
+       Postre(nombre: "Pastel", emoji: "🍰"),
+       Postre(nombre: "Helado", emoji: "🍦"),//pepe
+       Postre(nombre: "Donas", emoji: "🍩"),
+       Postre(nombre: "Pastel", emoji: "🍰"),
+       Postre(nombre: "Helado", emoji: "🍦"),//pepe
+       Postre(nombre: "Donas", emoji: "🍩")
+    ]
     var body: some View{
         ZStack{
             LinearGradient(
-                gradient: Gradient(colors: [.pink, .white]),
-                startPoint:.top,
-                endPoint:.bottom
-                ).ignoresSafeArea()
+                gradient: Gradient(colors: [.purple, .white]),
+                startPoint: .top,
+                endPoint: .bottom
+            ).ignoresSafeArea()
             VStack{
-                Text("Mis Mascotas")
+                Text("Postres Favoritos")
                     .font(.title)
-                ScrollView(.horizontal){
+                ScrollView(.horizontal) {
                     HStack {
-                        ForEach(mascotas) { mascota in
-                            MascotaCardView(animal: mascota)
+                        ForEach(postres) { pepe in
+                            PostreCard(jue: pepe)
+                                .padding()
                         }
-                        .padding()
                     }
                 }
             }
@@ -36,26 +39,18 @@ struct ContentView: View {
     }
 }
 
-struct Mascota: Identifiable {
+struct Postre: Identifiable{
     let id = UUID()
-    let nombre: String
+    let nombre : String
     let emoji: String
 }
 
-struct MascotaCardView: View{
-    let animal : Mascota //se guarda las propiedades de Mascota para usarla aqui en esta estructura
+struct PostreCard: View{
+    let jue : Postre
     var body: some View{
-        HStack{
-            Text(animal.emoji)
-            Text(animal.nombre)
-            Spacer()
-            Button(action: {
-                print(" Mascota favorita: animal.nombre")
-            }) {
-                Image(systemName: "heart.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(.yellow)
-            }
+        VStack{
+            Text(jue.nombre)
+            Text(jue.emoji)
         }
     }
 }
