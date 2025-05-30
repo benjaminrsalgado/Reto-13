@@ -8,53 +8,56 @@
 import SwiftUI
 
 struct ContentView: View {
-    let postres = [
-       Postre(nombre: "Pastel", emoji: "🍰"),
-       Postre(nombre: "Helado", emoji: "🍦"),//pepe
-       Postre(nombre: "Donas", emoji: "🍩"),
-       Postre(nombre: "Pastel", emoji: "🍰"),
-       Postre(nombre: "Helado", emoji: "🍦"),//pepe
-       Postre(nombre: "Donas", emoji: "🍩")
+    let alchol = [
+        Bebida(nombre: "Bacardi", emoji: "🍻"),
+        Bebida(nombre: "Torres 10", emoji: "🍻"),
+        Bebida(nombre: "Tequila", emoji: "🍻"),
+        Bebida(nombre: "Champagne", emoji: "🍻"),
+        Bebida(nombre: "Bacardi", emoji: "🍻"),
+        Bebida(nombre: "Torres 10", emoji: "🍻"),
+        Bebida(nombre: "Tequila", emoji: "🍻"),
+        Bebida(nombre: "Champagne", emoji: "🍻")
     ]
+    
     var body: some View{
         ZStack{
             LinearGradient(
-                gradient: Gradient(colors: [.purple, .white]),
+                gradient: Gradient(colors: [.yellow, .white]),
                 startPoint: .top,
                 endPoint: .bottom
             ).ignoresSafeArea()
+            
             VStack{
-                Text("Postres Favoritos")
+                Text("Welcome to the Homero's Bar")
                     .font(.title)
-                ScrollView(.horizontal) {
-                    HStack {
-                        ForEach(postres) { pepe in
-                            PostreCard(jue: pepe)
-                                .padding()
+                ScrollView{
+                    VStack{
+                        ForEach(alchol){ pepe in
+                            BebidaCard(cantina: pepe)
                         }
                     }
                 }
+                
             }
         }
     }
 }
-
-struct Postre: Identifiable{
+struct Bebida: Identifiable{
     let id = UUID()
-    let nombre : String
+    let nombre: String
     let emoji: String
 }
 
-struct PostreCard: View{
-    let jue : Postre
+struct BebidaCard: View{
+    let cantina : Bebida
     var body: some View{
-        VStack{
-            Text(jue.nombre)
-            Text(jue.emoji)
-        }
+        Text(cantina.nombre)
+            .foregroundColor(.black)
+            .font(.headline)
+        Text(cantina.emoji)
+            .font(.headline)
     }
 }
-
 #Preview {
     ContentView()
 }
