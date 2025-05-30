@@ -8,79 +8,79 @@
 import SwiftUI
 
 struct ContentView: View {
-    let comida = [
-        Pizza(nombre: "Stich pizza", emoji: "heart.fill"),
-        Pizza(nombre: "Taylor pizza", emoji: "heart.fill"),
-        Pizza(nombre: "Swift pizza", emoji: "heart.fill"),
-        Pizza(nombre: "Eras pizza", emoji: "heart.fill"),
-        Pizza(nombre: "WWDC pizza", emoji: "heart.fill"),
-        Pizza(nombre: "Cuerptino pizza", emoji: "heart.fill"),
-        Pizza(nombre: "Apple pizza", emoji: "heart.fill")
+    let profesionales = [
+        Persona( nombre: "Benjamin", emoji: "💻", profesion: "iOS Developer"),
+        Persona( nombre: "Francisco", emoji: "👨🏻‍🎨", profesion: "Pintor"),
+        Persona( nombre: "Barb", emoji: "👩🏻‍🔬", profesion: "Cientifica"),
+        Persona( nombre: "Vic", emoji: "👨🏻‍🏫", profesion: "Maestra"),
+        Persona( nombre: "Benjamin", emoji: "💻", profesion: "iOS Developer"),
+        Persona( nombre: "Francisco", emoji: "👨🏻‍🎨", profesion: "Pintor"),
+        Persona( nombre: "Barb", emoji: "👩🏻‍🔬", profesion: "Cientifica"),
+        Persona( nombre: "Vic", emoji: "👨🏻‍🏫", profesion: "Maestra"),
+        Persona( nombre: "Benjamin", emoji: "💻", profesion: "iOS Developer"),
+        Persona( nombre: "Francisco", emoji: "👨🏻‍🎨", profesion: "Pintor"),
+        Persona( nombre: "Barb", emoji: "👩🏻‍🔬", profesion: "Cientifica"),
+        Persona( nombre: "Vic", emoji: "👨🏻‍🏫", profesion: "Maestra"),
     ]
     var body: some View{
         ZStack{
-            LinearGradient(
-                gradient: Gradient(colors: [.red, .orange]),
+                LinearGradient(
+                gradient: Gradient(colors: [.blue, .white]),
                 startPoint: .top,
                 endPoint: .bottom
-            ).ignoresSafeArea()
-            
+                ).ignoresSafeArea()
             VStack{
-                Text("Pizza Swift")
-                    .font(.title)
-                    .foregroundColor(.white)
-                Image(systemName: "star.fill")
-                    .font(.title)
+                Text("Mis Contactos")
+                    .font(.largeTitle)
                     .foregroundColor(.white)
                 ScrollView{
                     VStack{
-                        ForEach(comida){ pepe in
-                            PizzaCard (comida: pepe)
+                        ForEach(profesionales){ pepe in
+                            PersonaCard(carta: pepe)
                         }
                     }
+                   
                 }
-               }
+            }
         }
     }
 }
 
-struct Pizza: Identifiable{
+struct Persona: Identifiable{
     let id = UUID()
     let nombre: String
     let emoji: String
+    let profesion: String
 }
 
-struct PizzaCard: View {
-    let comida: Pizza
-
-    var body: some View {
-        HStack(spacing: 15) {
-            Image(systemName: comida.emoji)
-                .font(.largeTitle)
-                .foregroundColor(.white)
-
-            VStack(alignment: .leading) {
-                Text(comida.nombre)
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Text("¡Una pizza especial!")
+struct PersonaCard: View{
+    let carta : Persona
+    var body: some View{
+        HStack{
+            Text(carta.emoji)
+                .font(.title)
+            VStack (alignment: .leading){
+                Text(carta.nombre)
+                    .font(.title)
+                Text(carta.profesion)
                     .font(.subheadline)
-                    .foregroundColor(.white.opacity(0.7))
+                    .foregroundColor(.gray)
             }
-
+            .foregroundColor(.white)
             Spacer()
-
-            Button("Ordenar") {
-                print("Ordenaste una \(comida.nombre)")
+            Button(action: {
+                print("Saludar")
+            }) {
+               Text("Hola, \(carta.nombre)!")
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background(Color.white)
-            .foregroundColor(.red)
-            .clipShape(Capsule())
+            .foregroundColor(.white)
+           
         }
-        .padding()
-       
+            .padding()
+            .background(.white.opacity(0.2))
+            .cornerRadius(12)
+            .shadow(radius: 5)
+            .padding(.horizontal)
     }
 }
 #Preview {
