@@ -50,22 +50,37 @@ struct Pizza: Identifiable{
     let emoji: String
 }
 
-struct PizzaCard: View{
+struct PizzaCard: View {
     let comida: Pizza
-    var body: some View{
-        HStack{
+
+    var body: some View {
+        HStack(spacing: 15) {
             Image(systemName: comida.emoji)
+                .font(.largeTitle)
                 .foregroundColor(.white)
-            Text(comida.nombre)
-                .font(.title)
-                .foregroundColor(.white)
+
+            VStack(alignment: .leading) {
+                Text(comida.nombre)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                Text("¡Una pizza especial!")
+                    .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.7))
+            }
+
             Spacer()
+
             Button("Ordenar") {
                 print("Ordenaste una \(comida.nombre)")
             }
-            .buttonStyle(.borderedProminent)
-            .foregroundColor(.white)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(Color.white)
+            .foregroundColor(.red)
+            .clipShape(Capsule())
         }
+        .padding()
+       
     }
 }
 #Preview {
