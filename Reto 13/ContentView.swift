@@ -8,54 +8,64 @@
 import SwiftUI
 
 struct ContentView: View {
-    let alchol = [
-        Bebida(nombre: "Bacardi", emoji: "🍻"),
-        Bebida(nombre: "Torres 10", emoji: "🍻"),
-        Bebida(nombre: "Tequila", emoji: "🍻"),
-        Bebida(nombre: "Champagne", emoji: "🍻"),
-        Bebida(nombre: "Bacardi", emoji: "🍻"),
-        Bebida(nombre: "Torres 10", emoji: "🍻"),
-        Bebida(nombre: "Tequila", emoji: "🍻"),
-        Bebida(nombre: "Champagne", emoji: "🍻")
+    let comida = [
+        Pizza(nombre: "Stich pizza", emoji: "heart.fill"),
+        Pizza(nombre: "Taylor pizza", emoji: "heart.fill"),
+        Pizza(nombre: "Swift pizza", emoji: "heart.fill"),
+        Pizza(nombre: "Eras pizza", emoji: "heart.fill"),
+        Pizza(nombre: "WWDC pizza", emoji: "heart.fill"),
+        Pizza(nombre: "Cuerptino pizza", emoji: "heart.fill"),
+        Pizza(nombre: "Apple pizza", emoji: "heart.fill")
     ]
-    
     var body: some View{
         ZStack{
             LinearGradient(
-                gradient: Gradient(colors: [.yellow, .white]),
+                gradient: Gradient(colors: [.red, .orange]),
                 startPoint: .top,
                 endPoint: .bottom
             ).ignoresSafeArea()
             
             VStack{
-                Text("Welcome to the Homero's Bar")
+                Text("Pizza Swift")
                     .font(.title)
+                    .foregroundColor(.white)
+                Image(systemName: "star.fill")
+                    .font(.title)
+                    .foregroundColor(.white)
                 ScrollView{
                     VStack{
-                        ForEach(alchol){ pepe in
-                            BebidaCard(cantina: pepe)
+                        ForEach(comida){ pepe in
+                            PizzaCard (comida: pepe)
                         }
                     }
                 }
-                
-            }
+               }
         }
     }
 }
-struct Bebida: Identifiable{
+
+struct Pizza: Identifiable{
     let id = UUID()
     let nombre: String
     let emoji: String
 }
 
-struct BebidaCard: View{
-    let cantina : Bebida
+struct PizzaCard: View{
+    let comida: Pizza
     var body: some View{
-        Text(cantina.nombre)
-            .foregroundColor(.black)
-            .font(.headline)
-        Text(cantina.emoji)
-            .font(.headline)
+        HStack{
+            Image(systemName: comida.emoji)
+                .foregroundColor(.white)
+            Text(comida.nombre)
+                .font(.title)
+                .foregroundColor(.white)
+            Spacer()
+            Button("Ordenar") {
+                print("Ordenaste una \(comida.nombre)")
+            }
+            .buttonStyle(.borderedProminent)
+            .foregroundColor(.white)
+        }
     }
 }
 #Preview {
